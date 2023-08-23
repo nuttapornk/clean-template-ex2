@@ -4,7 +4,7 @@ areegator-subbroker-companyapi
 areegator-subbroker-reportapi
 
 # Command
-```bash
+```javascript
 dotnet new install .\
 dotnet new uninstall .\
 ```
