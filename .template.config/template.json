@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Nuttaporn",
+  "classifications": [
+    "API",
+    "ASP.NET",
+    "Clean Architecture"
+  ],
+  "name": "Clean Architecture Web API",
+  "identity": "Clean Architecture Web API",
+  "description": "Clean Architechture for RestFul Web API template",
+  "shortName": "clean-api",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "Platform": {
+      "type": "parameter",
+      "description": "PLATFORM specific [Insplatform, Areegator, Areetech]",
+      "isRequired": true,
+      "dataType": "string",
+      "replaces": "_PLATFORM_"
+    },
+    "Domain": {
+      "type": "parameter",
+      "description": "DOMAIN specific following wiki domain-shortName",
+      "isRequired": true,
+      "datatype": "string",
+      "replaces": "_DOMAIN_"
+    }
+  },
+  "sourceName": "_COMPONENT_",
+  "preferNameDirectory": true,
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**/*",
+        ".vs/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "**/.git/**",
+        "**/docs/**",
+        "*.nuspec",
+        "nuget.config",
+        "**/node_modules/**"
+      ]
+    }
+  ]
+}
