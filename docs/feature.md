@@ -12,11 +12,13 @@ dotnet new uninstall .\
 - ✔ Dotnet new template with Project name
 - ✔ Readme with Project name
 - ✔ Dockerfile with Project name
-
-
+- ✔ NSwag add header JWT
+- ✔ Custom HealthCheck ปรับให้เหมาะกับงาน
+- 
 # Clean Architecture 
-
-# CQRS
+- ✔ CQRS
+- ✔ WeatherForecast Api controller Example
+-  
 
 # Entity Framwork Core
 
