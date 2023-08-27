@@ -2,16 +2,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using _COMPONENT_.Helpers.NSwag;
+using NSwag;
+using NSwag.Generation.AspNetCore;
+using NSwag.Generation.Processors.Security;
 
 namespace _COMPONENT_;
 
 public static class ConfigureService
 {
-    public static IServiceCollection AddComponentService(this IServiceCollection service,
+    public static IServiceCollection AddComponentService(this IServiceCollection services,
     IConfiguration configuration, string environmentName)
     {
-        service.AddHttpContextAccessor();
-        service.AddCors(options =>
+        services.AddHttpContextAccessor();
+        services.AddCors(options =>
         {
             options.AddPolicy("CORS", policy =>
             {
@@ -21,7 +25,25 @@ public static class ConfigureService
             });
         });
 
+        services.AddOpenApiDocument(config =>
+        {
+            config.Title = "_COMPONENT_ API";
+            config.Version = "v1";
+            config.Description = $"_COMPONENT_ API {environmentName}";
+            config.OperationProcessors.Add(new AddRequiredHeaderParameter());
 
-        return service;
+            ////Add Header Authorization JWT
+            // config.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+            // {
+            //     Type = OpenApiSecuritySchemeType.ApiKey,
+            //     Name = "Authorization",
+            //     In = OpenApiSecurityApiKeyLocation.Header,
+            //     Description = "Type into the textbox: Bearer {your JWT token}."
+            // });
+            // config.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
+
+        });
+
+        return services;
     }
 }
