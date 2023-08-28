@@ -14,7 +14,8 @@ dotnet new uninstall .\
 - ✔ Dockerfile with Project name
 - ✔ NSwag add header JWT
 - ✔ Custom HealthCheck ปรับให้เหมาะกับงาน
-- 
+- ✔ BaseRequest,BaseResponse
+- ✔ RequestHeaderMiddleware
 # Clean Architecture 
 - ✔ CQRS
 - ✔ WeatherForecast Api controller Example
