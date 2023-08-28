@@ -1,3 +1,4 @@
+using Application.Common.Models;
 using Application.Process.Weather.Queries.GetWeatherForecasts.v1;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,8 +16,18 @@ public class WeatherForecastController : ApiControllerBase
     }
 
     [HttpGet("v1/GetWeatherForecast")]
-    public async Task<IEnumerable<GetWeatherForecastsResponse>> Get()
+    public async Task<IActionResult> Get()
     {
-        return await Mediator.Send(new GetWeatherForecastsQuery());
+        try
+        {
+            var result = await Mediator.Send(new GetWeatherForecastsQuery());
+            return Ok(BaseResponse.Ok(result));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, nameof(Get));
+            return BadRequest();
+        }
+
     }
 }
