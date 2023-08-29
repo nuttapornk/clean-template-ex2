@@ -1,5 +1,5 @@
-namespace Application.Process.Weather.Queries.GetWeatherForecasts.v1;
-public class GetWeatherForecastsResponse
+namespace Application.Process.Weather.Queries.GetWeatherForecast.v1;
+public class GetWeatherForecastResponse
 {
     public DateTime Date { get; set; }
     public int TemperatureC { get; set; }

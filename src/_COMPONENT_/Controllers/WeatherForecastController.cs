@@ -1,5 +1,5 @@
 using Application.Common.Models;
-using Application.Process.Weather.Queries.GetWeatherForecasts.v1;
+using Application.Process.Weather.Queries.GetWeatherForecast.v1;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _COMPONENT_.Controllers;
@@ -15,12 +15,12 @@ public class WeatherForecastController : ApiControllerBase
         _logger = logger;
     }
 
-    [HttpGet("v1/GetWeatherForecast")]
-    public async Task<IActionResult> Get()
+    [HttpPost("v1/GetWeatherForecast")]
+    public async Task<IActionResult> Get([FromBody] GetWeatherForecastQuery request)
     {
         try
         {
-            var result = await Mediator.Send(new GetWeatherForecastsQuery());
+            var result = await Mediator.Send(request);
             return Ok(BaseResponse.Ok(result));
         }
         catch (Exception ex)
