@@ -1,5 +1,7 @@
 using Application.Common.Models;
+using Application.Process.Weather.Commands.CreateWeatherForcasts.v1;
 using Application.Process.Weather.Queries.GetWeatherForecast.v1;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _COMPONENT_.Controllers;
@@ -8,26 +10,40 @@ namespace _COMPONENT_.Controllers;
 [Route("[controller]")]
 public class WeatherForecastController : ApiControllerBase
 {
-
     private readonly ILogger<WeatherForecastController> _logger;
     public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
     }
 
-    [HttpPost("v1/GetWeatherForecast")]
-    public async Task<IActionResult> Get([FromBody] GetWeatherForecastQuery request)
+    [HttpPost("/v1/Create")]
+    public async Task<IActionResult> Create(CreateWeatherForcastCommand request)
     {
         try
         {
             var result = await Mediator.Send(request);
-            return Ok(BaseResponse.Ok(result));
+            return StatusCode(201, result);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, nameof(Get));
+            _logger.LogError(ex, nameof(Create));
             return BadRequest();
         }
-
     }
+
+    // [HttpPost("v1/GetWeatherForecast")]
+    // public async Task<IActionResult> Get([FromBody] GetWeatherForecastQuery request)
+    // {
+    //     try
+    //     {
+    //         var result = await Mediator.Send(request);
+    //         return Ok(BaseResponse.Ok(result));
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         _logger.LogError(ex, nameof(Get));
+    //         return BadRequest();
+    //     }
+
+    // }
 }
