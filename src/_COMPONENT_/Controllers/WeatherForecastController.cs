@@ -1,7 +1,6 @@
 using Application.Common.Models;
 using Application.Process.Weather.Commands.CreateWeatherForcasts.v1;
-using Application.Process.Weather.Queries.GetWeatherForecast.v1;
-using Domain.Entities;
+using Application.Process.Weather.Queries.GetWeatherForecasts.v1;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _COMPONENT_.Controllers;
@@ -16,34 +15,37 @@ public class WeatherForecastController : ApiControllerBase
         _logger = logger;
     }
 
-    [HttpPost("/v1/Create")]
+    [HttpPost("v1/Create")]
     public async Task<IActionResult> Create(CreateWeatherForcastCommand request)
     {
         try
         {
             var result = await Mediator.Send(request);
-            return StatusCode(201, result);
+            return StatusCode(201, BaseResponse.Ok(result));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, nameof(Create));
-            return BadRequest();
+            return StatusCode(500, BaseResponse.Error500(
+                errorCode: "202309060031", devErrorMessage: ex.Message));
         }
     }
 
-    // [HttpPost("v1/GetWeatherForecast")]
-    // public async Task<IActionResult> Get([FromBody] GetWeatherForecastQuery request)
-    // {
-    //     try
-    //     {
-    //         var result = await Mediator.Send(request);
-    //         return Ok(BaseResponse.Ok(result));
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         _logger.LogError(ex, nameof(Get));
-    //         return BadRequest();
-    //     }
+    [HttpGet("v1/Get")]
+    public async Task<IActionResult> Get()
+    {
+        try
+        {
+            var query = new GetWeatherForecastQuery();
+            var results = await Mediator.Send(query);
+            return StatusCode(201, BaseResponse.Ok(results));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, nameof(Get));
+            return StatusCode(500, BaseResponse.Error500(
+                errorCode: "202309060119", devErrorMessage: ex.Message));
+        }
 
-    // }
+    }
 }

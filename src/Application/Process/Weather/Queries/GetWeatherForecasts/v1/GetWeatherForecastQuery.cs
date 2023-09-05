@@ -1,10 +1,8 @@
 using MediatR;
 
-namespace Application.Process.Weather.Queries.GetWeatherForecast.v1;
+namespace Application.Process.Weather.Queries.GetWeatherForecasts.v1;
 
 public record GetWeatherForecastQuery : IRequest<IEnumerable<GetWeatherForecastResponse>>
 {
-    public int Days { get; set; }
+
 }
-
-

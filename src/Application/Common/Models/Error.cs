@@ -1,15 +1,15 @@
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Application.Common.Models;
 
 public class Error
 {
-    [JsonProperty("errorcode")]
+    [JsonPropertyName("errorCode")]
     public string? Code { get; set; }
 
-    [JsonProperty("headermessage")]
+    [JsonPropertyName("errorHeader")]
     public string? Header { get; set; }
 
-    [JsonProperty("errormessage")]
+    [JsonPropertyName("errorMessage")]
     public string? Message { get; set; }
 }
