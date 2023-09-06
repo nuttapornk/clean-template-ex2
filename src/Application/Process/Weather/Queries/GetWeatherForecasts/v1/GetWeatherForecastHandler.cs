@@ -18,13 +18,13 @@ public class GetWeatherForecastHandler : IRequestHandler<GetWeatherForecastQuery
     public async Task<IEnumerable<GetWeatherForecastResponse>> Handle(GetWeatherForecastQuery request, CancellationToken cancellationToken)
     {
         var weatherForecasts = await _weatherForecastRepository.FindAllAsync();
-        //var results = _mapper.Map<IEnumerable<GetWeatherForecastResponse>>(weatherForecasts);
-        var results = weatherForecasts.Select(a => new GetWeatherForecastResponse
-        {
-            Date = a.Date,
-            TemperatureC = a.TemperatureC,
-            Summaries = a.Summaries
-        }).ToList();
-        return results;
+        var result = _mapper.Map<IEnumerable<GetWeatherForecastResponse>>(weatherForecasts);
+        // var results = weatherForecasts.Select(a => new GetWeatherForecastResponse
+        // {
+        //     Date = a.Date,
+        //     TemperatureC = a.TemperatureC,
+        //     Summaries = a.Summaries
+        // }).ToList();
+        return result;
     }
 }

@@ -1,5 +1,6 @@
-namespace Application.Process.Weather.Queries.GetWeatherForecasts.v1;
-public record GetWeatherForecastResponse
+namespace Application.Process.Weather.Queries.GetWeatherForecastById.v1;
+
+public record GetWeatherForecastByIdResponse
 {
     public DateTime Date { get; set; }
     public int TemperatureC { get; set; }

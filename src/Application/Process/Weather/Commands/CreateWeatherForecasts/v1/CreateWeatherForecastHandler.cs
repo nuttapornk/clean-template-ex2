@@ -3,8 +3,8 @@ using Domain.Entities;
 using Domain.Events;
 using MediatR;
 
-namespace Application.Process.Weather.Commands.CreateWeatherForcasts.v1;
-public class CreateWeatherForecastHandler : IRequestHandler<CreateWeatherForcastCommand, int>
+namespace Application.Process.Weather.Commands.CreateWeatherForecasts.v1;
+public class CreateWeatherForecastHandler : IRequestHandler<CreateWeatherForecastCommand, int>
 {
     private readonly IWeatherForecastRepository _weatherForecastRepository;
 
@@ -13,7 +13,7 @@ public class CreateWeatherForecastHandler : IRequestHandler<CreateWeatherForcast
         _weatherForecastRepository = weatherForecastRepository;
     }
 
-    public async Task<int> Handle(CreateWeatherForcastCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateWeatherForecastCommand request, CancellationToken cancellationToken)
     {
         WeatherForecast entity = new()
         {

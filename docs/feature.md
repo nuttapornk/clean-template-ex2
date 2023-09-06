@@ -18,14 +18,16 @@ dotnet new uninstall .\
 - ✔ RequestHeaderMiddleware
 # Clean Architecture 
 - ✔ CQRS
-- ✔ WeatherForecast Api controller Example
--  
+- ✔ WeatherForecast Api controller Example (Create,Update,Delete,Select)
 
 # Entity Framwork Core
+- ✔ Use ApplicationDbContext
 
 # Automapper
+- ✔ Use AutoMapper
 
 # FluentValidation
+- ✔ Validate model with FluentValidation
 
 # Refit connect External API wiht
 - adfa
