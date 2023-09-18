@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Xunit;
 using Moq;
 using Application.Common.Interfaces.Repositories;
-using Application.Process.Weather;
 using Domain.Entities;
 using AutoMapper;
 using Application.Process.Weather.Queries.GetWeatherForecasts.v1;
@@ -20,10 +14,6 @@ namespace Application.UnitTests.Process.Weather.Queries.GetWeatherForecasts.v1
         private readonly IMapper _mapper;
         public GetWeatherForecasts()
         {
-
-
-
-
             var mappingConfig = new MapperConfiguration(mc =>
                 {
                     mc.AddProfile(new WeatherForecastAutoMapper());
@@ -43,7 +33,7 @@ namespace Application.UnitTests.Process.Weather.Queries.GetWeatherForecasts.v1
             return Task.FromResult(weatherForecasts.AsEnumerable());
         }
 
-        private static Task<WeatherForecast?> WeatherForecastsFindById()
+        private static WeatherForecast? WeatherForecastsFindById()
         {
             var weatherForecast = new WeatherForecast
             {
@@ -52,7 +42,7 @@ namespace Application.UnitTests.Process.Weather.Queries.GetWeatherForecasts.v1
                 TemperatureC = 10,
                 Summaries = "Cool"
             };
-            return Task.FromResult(weatherForecast);
+            return weatherForecast;
         }
 
 
@@ -84,7 +74,7 @@ namespace Application.UnitTests.Process.Weather.Queries.GetWeatherForecasts.v1
             Mock<IWeatherForecastRepository> mockRepository = new();
             mockRepository
                 .Setup(a => a.FindByIdAsync(1))
-                .Returns(WeatherForecastsFindById());
+                .ReturnsAsync(WeatherForecastsFindById());
 
             IWeatherForecastRepository repository = mockRepository.Object;
             var handler = new GetWeatherForecastByIdHandler(repository, _mapper);
@@ -104,7 +94,7 @@ namespace Application.UnitTests.Process.Weather.Queries.GetWeatherForecasts.v1
             Mock<IWeatherForecastRepository> mockRepository = new();
             mockRepository
                 .Setup(a => a.FindByIdAsync(1))
-                .Returns(WeatherForecastsFindById());
+                .ReturnsAsync(WeatherForecastsFindById());
 
             IWeatherForecastRepository repository = mockRepository.Object;
             var handler = new GetWeatherForecastByIdHandler(repository, _mapper);

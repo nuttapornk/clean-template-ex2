@@ -36,3 +36,5 @@ dotnet new uninstall .\
 # Elastic log and Kafka
 
 # Unit With xUnit
+- ✔ Domain UnitTests
+- ✔ Application UnitTests
